@@ -13,7 +13,9 @@ messages = [
     "Who teaches chemistry?",
     "When is my math test?",
     "Hi there",
-    "I need help with algebra"
+    "I need help with algebra",
+    "How do I register for classes and where is the registration office located",
+    "how do you sleep at night knowing that you are a terrible person",
 ]
 
 # Convert messages into TF-IDF
