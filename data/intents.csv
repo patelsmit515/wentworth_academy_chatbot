@@ -1,0 +1,33 @@
+intent,text
+greeting,Hello
+greeting,Hi
+greeting,Hey
+greeting,Good morning
+greeting,Good afternoon
+school_location,Where is the library?
+school_location,Where can I find the library?
+school_location,Where is the science building?
+school_location,Where is the cafeteria?
+school_location,Where is the gym?
+class_schedule,What classes do I have today?
+class_schedule,What is my schedule?
+class_schedule,When is my math class?
+class_schedule,When do we have chemistry?
+teacher_information,Who teaches mathematics?
+teacher_information,Who is my chemistry teacher?
+teacher_information,Who teaches English?
+exam_schedule,When is the math exam?
+exam_schedule,When is my chemistry test?
+exam_schedule,When are the exams?
+club_information,What clubs does Wentworth Academy have?
+club_information,What clubs can I join?
+club_information,Are there any sports clubs?
+school_rules,What are the school rules?
+school_rules,What are the rules at Wentworth Academy?
+school_rules,Am I allowed to use my phone at school?
+academic_help,I need help with mathematics
+academic_help,I don't understand algebra
+academic_help,Can you help me with chemistry?
+goodbye,Bye
+goodbye,Goodbye
+goodbye,See you later
