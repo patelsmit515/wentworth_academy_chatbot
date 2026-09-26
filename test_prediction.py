@@ -39,8 +39,6 @@ test_predictions = model.predict(X_test)
 
 accuracy = accuracy_score(y_test, test_predictions)
 
-print("Model Evaluation")
-
 print(f"\nAccuracy: {accuracy:.2f}")
 
 print("\nClassification Report:")
