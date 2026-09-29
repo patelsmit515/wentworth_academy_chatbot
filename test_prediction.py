@@ -1,6 +1,7 @@
 from src.data_loader import load_intents
 from src.training import train_model
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.metrics.pairwise import cosine_similarity
 
 # Load dataset
 df = load_intents("data/intents.csv")
@@ -27,21 +28,23 @@ messages = [
 # Convert messages into TF-IDF
 messages_tfidf = vectorizer.transform(messages)
 
-# Predict intents
-# Predict intents for new messages
+# Predict intents and check similarity for new messages
 predictions = model.predict(messages_tfidf)
-probabilities = model.predict_proba(messages_tfidf)
 
-for message, prediction, probability in zip(
-    messages,
-    predictions,
-    probabilities
-):
-    confidence = probability.max()
+for message, prediction in zip(messages, predictions):
+
+    message_tfidf = vectorizer.transform([message])
+
+    similarities = cosine_similarity(
+        message_tfidf,
+        X_train_tfidf
+    )
+
+    max_similarity = similarities.max()
 
     print(
         f"{message} → {prediction} "
-        f"(confidence: {confidence:.2f})"
+        f"(similarity: {max_similarity:.2f})"
     )
         
     
