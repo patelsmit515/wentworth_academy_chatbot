@@ -23,4 +23,4 @@ def train_model(df):
 
     model.fit(X_train_tfidf, y_train)
 
-    return model, vectorizer, X_test_tfidf, y_test, X_test
+    return model, vectorizer, X_train_tfidf, X_test_tfidf, y_test, X_test

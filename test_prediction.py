@@ -6,7 +6,7 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 df = load_intents("data/intents.csv")
 
 # Train model
-model, vectorizer, X_test_tfidf, y_test, X_test_text = train_model(df)
+model, vectorizer, X_train_tfidf, X_test_tfidf, y_test, X_test_text = train_model(df)
 
 # New student messages
 messages = [
@@ -28,12 +28,23 @@ messages = [
 messages_tfidf = vectorizer.transform(messages)
 
 # Predict intents
+# Predict intents for new messages
 predictions = model.predict(messages_tfidf)
+probabilities = model.predict_proba(messages_tfidf)
 
-for message, prediction in zip(messages, predictions):
-    print(f"'{message}' → {prediction}")
+for message, prediction, probability in zip(
+    messages,
+    predictions,
+    probabilities
+):
+    confidence = probability.max()
+
+    print(
+        f"{message} → {prediction} "
+        f"(confidence: {confidence:.2f})"
+    )
+        
     
-
 # Evaluate model on test data
 test_predictions = model.predict(X_test_tfidf)
 
