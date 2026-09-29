@@ -1,135 +1,173 @@
 intent,text
+greeting,Hello
+greeting,Hi there
 greeting,Hey there
-greeting,How's it going?
+greeting,Good morning
+greeting,Good afternoon
+greeting,Good evening
+greeting,Hello there
+greeting,Hi how are you
+greeting,Hey how are things
 greeting,Nice to see you
 greeting,Good to see you
-greeting,How are you doing?
-greeting,Hello there
-greeting,Hi there
-greeting,Hey how are things?
 greeting,I wanted to say hello
-greeting,Is anyone there?
-greeting,Hope you're doing well
-greeting,Hi I have a question
-greeting,Hey can you help me?
-greeting,Good evening
-greeting,Are you available?
-school_location,I'm trying to find a place to read
-school_location,Where do students go for lunch?
-school_location,I need to find the sports area
-school_location,I'm looking for the building where experiments are done
-school_location,Could you tell me where I should go?
-school_location,Which way should I go from the main entrance?
-school_location,Where can I study quietly?
-school_location,Where do I go to get something to eat?
-school_location,How do I get to the science building?
-school_location,Which building has the laboratories?
-school_location,Where can I find the sports area?
-school_location,I'm trying to find the dining area
-school_location,Where is the main entrance?
-school_location,How do I get to the library from the entrance?
-school_location,Where are the study rooms?
-class_schedule,What lessons are on my timetable?
-class_schedule,Which subjects do I have today?
-class_schedule,What lesson do I have first?
-class_schedule,What comes after my morning lesson?
-class_schedule,Which class should I go to next?
-class_schedule,What does my timetable look like?
-class_schedule,Which subjects am I taking today?
-class_schedule,Can I see my lessons for today?
-class_schedule,What is scheduled for this afternoon?
-class_schedule,Which lesson am I supposed to attend now?
-class_schedule,What is my first lesson tomorrow?
-class_schedule,Which subject do I have next?
-class_schedule,What lessons are planned for today?
-class_schedule,Can I check my timetable?
-class_schedule,What am I studying today?
-teacher_information,Who should I speak to about this subject?
-teacher_information,Who is responsible for this course?
-teacher_information,Which staff member handles this subject?
-teacher_information,Who takes care of our lessons in this area?
-teacher_information,Who will be teaching us?
-teacher_information,Who do I report to for this course?
-teacher_information,Who teaches biology?
-teacher_information,Who teaches history?
-teacher_information,Who is in charge of our math lessons?
-teacher_information,Which teacher handles chemistry?
-teacher_information,Who will teach my English class?
-teacher_information,Who is responsible for this subject?
-teacher_information,Who is our science instructor?
-teacher_information,Which teacher should I talk to?
-exam_schedule,When do the assessments take place?
-exam_schedule,When will we be tested?
-exam_schedule,What day is the test?
-exam_schedule,When should I start preparing?
-exam_schedule,How soon is the next test?
-exam_schedule,When do I need to take the assessment?
-exam_schedule,What date is the test?
-exam_schedule,When are we being tested?
-exam_schedule,How much time do I have before the test?
-exam_schedule,When should I be ready for the assessment?
-exam_schedule,When is the next assessment?
-exam_schedule,What date should I prepare for?
-exam_schedule,When is my next test?
-exam_schedule,How long do I have before the exam?
-exam_schedule,When will the next exam happen?
-club_information,Is there anything I can join after lessons?
-club_information,What activities are available outside class?
-club_information,Can students take part in any groups?
-club_information,Is there something I can join with other students?
-club_information,What can I do in my free time here?
-club_information,Are there activities for students after school?
-club_information,Are there any music groups?
-club_information,Does the school have a drama group?
-club_information,Can I join a sports activity?
-club_information,What student groups are available?
-club_information,Are there any art groups?
-club_information,What extracurricular activities are offered?
-club_information,Can students join groups outside their lessons?
-club_information,What activities can students participate in?
-club_information,Does the school offer any after-school groups?
-school_rules,What am I permitted to do here?
-school_rules,Are there things students are not allowed to do?
-school_rules,What happens if someone breaks a rule?
-school_rules,Is there a dress requirement?
-school_rules,Are students allowed to leave during the day?
-school_rules,What do I need to follow while I'm here?
-school_rules,Can students use phones during lessons?
-school_rules,Are there rules about attendance?
-school_rules,What happens when a student breaks the rules?
-school_rules,Are students allowed to be late?
-school_rules,Is there a required dress code?
-school_rules,Can I leave campus during the day?
-school_rules,What behavior is not allowed?
-school_rules,Are there restrictions on using devices?
-school_rules,What are students expected to follow?
-academic_help,I'm having trouble understanding this
-academic_help,Could someone explain this to me?
-academic_help,I'm stuck on my homework
-academic_help,This topic doesn't make sense to me
-academic_help,I can't figure out how to solve this
-academic_help,Could you explain how this works?
+greeting,Hello are you available
+greeting,Hi can you help me
+greeting,Hey there are you available
+greeting,Hello I have a question
+greeting,Hi I need some help
+greeting,Hey is anyone available
+school_location,Where is the library
+school_location,Where can I find the library
+school_location,How do I get to the library
+school_location,Where are the study rooms
+school_location,Where can I find a quiet study area
+school_location,Where is the dining hall
+school_location,Where can students go for lunch
+school_location,Where can I get something to eat
+school_location,Where is the sports area
+school_location,How do I get to the sports area
+school_location,Where is the science building
+school_location,Which building has the laboratories
+school_location,Where are the science laboratories
+school_location,How do I get to the main entrance
+school_location,Where is the main entrance
+school_location,Which way is the library from the main entrance
+school_location,Where is the student dining area
+school_location,Where can I find the school gym
+class_schedule,What lessons are on my timetable
+class_schedule,Which subjects do I have today
+class_schedule,What lesson do I have first today
+class_schedule,What class do I have next
+class_schedule,Which subject do I have next
+class_schedule,What comes after my morning class
+class_schedule,What comes after lunch on my timetable
+class_schedule,What lessons do I have this afternoon
+class_schedule,Can I see my timetable for today
+class_schedule,Can I check my class schedule
+class_schedule,What does my timetable look like
+class_schedule,Which classes am I taking today
+class_schedule,What is my first lesson tomorrow
+class_schedule,Which lesson should I attend now
+class_schedule,What class comes after this one
+class_schedule,What lessons are scheduled for today
+class_schedule,Can you show me my lesson order
+class_schedule,What classes do I have tomorrow
+teacher_information,Who teaches biology
+teacher_information,Who teaches history
+teacher_information,Who teaches chemistry
+teacher_information,Who teaches mathematics
+teacher_information,Who teaches English
+teacher_information,Who is my science teacher
+teacher_information,Who is my biology teacher
+teacher_information,Who is responsible for mathematics
+teacher_information,Who teaches our history class
+teacher_information,Which teacher handles chemistry
+teacher_information,Who will teach my English class
+teacher_information,Who is responsible for this subject
+teacher_information,Which teacher teaches this course
+teacher_information,Who is the teacher for this class
+teacher_information,Who should I speak to about my teacher
+teacher_information,Which teacher should I talk to about this course
+teacher_information,Who is responsible for our lessons in this subject
+teacher_information,Who is the instructor for this class
+exam_schedule,When is the next test
+exam_schedule,When is my next exam
+exam_schedule,What date is the next test
+exam_schedule,When will we be tested
+exam_schedule,When do the exams take place
+exam_schedule,When are the assessments scheduled
+exam_schedule,What day is the mathematics test
+exam_schedule,When is the biology exam
+exam_schedule,How soon is the next test
+exam_schedule,How much time do I have before the exam
+exam_schedule,When do I need to take the assessment
+exam_schedule,What is the date of the upcoming exam
+exam_schedule,When is the next assessment
+exam_schedule,When should I prepare for the exam
+exam_schedule,How long do I have before the test
+exam_schedule,When will the next exam happen
+exam_schedule,When are we taking the final exam
+exam_schedule,What date is my upcoming test
+club_information,What student clubs are available
+club_information,What clubs can I join
+club_information,Are there any student groups
+club_information,What extracurricular activities are offered
+club_information,Can students join clubs after school
+club_information,What activities are available after class
+club_information,Are there any music clubs
+club_information,Does the school have a drama club
+club_information,Are there any art clubs
+club_information,Can I join a sports club
+club_information,What sports groups can students join
+club_information,What activities can I do after school
+club_information,Which student organizations can I join
+club_information,Are there any clubs for students
+club_information,What groups are available outside lessons
+club_information,Does the school offer after-school activities
+club_information,Can I join a club with other students
+club_information,What extracurricular groups can I participate in
+school_rules,What are the school rules
+school_rules,What rules do students need to follow
+school_rules,What behavior is not allowed at school
+school_rules,Are students allowed to use phones during lessons
+school_rules,Are there restrictions on using phones
+school_rules,Are students allowed to leave campus during the day
+school_rules,Do students need permission to leave campus
+school_rules,What is the policy on leaving school grounds
+school_rules,Are students allowed to be late
+school_rules,What are the attendance rules
+school_rules,Is there a required dress code
+school_rules,What is the school dress policy
+school_rules,What happens if a student breaks a rule
+school_rules,What happens when someone breaks the school rules
+school_rules,What conduct is expected from students
+school_rules,What are students expected to follow
+school_rules,Are there rules about student behavior
+school_rules,What are the rules about using devices
+academic_help,I need help with my homework
+academic_help,I'm stuck on this homework problem
+academic_help,I don't understand this lesson
+academic_help,Can you explain this topic to me
+academic_help,I need help understanding this concept
+academic_help,I'm confused about this subject
+academic_help,Can you explain how this works
 academic_help,I don't understand this problem
-academic_help,Can you explain this subject to me?
-academic_help,I'm struggling with this lesson
-academic_help,I need help solving a problem
-academic_help,Could you help me understand this?
-academic_help,I'm confused about this topic
-academic_help,I don't know how to do this question
-academic_help,I'm having difficulty with this assignment
-academic_help,Can you help me understand this concept?
+academic_help,I'm having trouble with this exercise
+academic_help,I don't know how to solve this problem
+academic_help,Can you help me solve this question
+academic_help,I need help with this assignment
+academic_help,I'm struggling to understand this lesson
+academic_help,Could you explain the steps to this problem
+academic_help,I'm confused about how to work through this exercise
+academic_help,Can you help me understand this question
+academic_help,I don't know how to do this assignment
+academic_help,I'm having difficulty with this topic
 goodbye,I have to go now
-goodbye,I'll talk to you another time
-goodbye,That's all for now
-goodbye,I'm heading out
-goodbye,I'll be back later
-goodbye,Take care
-goodbye,See you soon
 goodbye,I have to leave now
-goodbye,Talk to you later
-goodbye,I'm done for now
-goodbye,I'll come back later
-goodbye,Until next time
-goodbye,Have a good day
 goodbye,I'm leaving now
-goodbye,See you around
+goodbye,I'm heading out
+goodbye,I need to go
+goodbye,I need to head off now
+goodbye,I'll talk to you later
+goodbye,I'll speak with you later
+goodbye,Talk to you later
+goodbye,I'll come back later
+goodbye,I'll be back later
+goodbye,See you soon
+goodbye,See you next time
+goodbye,Until next time
+goodbye,That's all for now
+goodbye,I'm done for now
+goodbye,Have a good day
+goodbye,Take care
+goodbye,I need to leave now
+goodbye,I should go now
+goodbye,I'm going to leave
+goodbye,I need to head home
+goodbye,I should get going
+goodbye,I have to go
+goodbye,Goodbye I'll be back later
+goodbye,Bye I'll see you another time
+goodbye,Goodbye for now
+goodbye,Bye for now

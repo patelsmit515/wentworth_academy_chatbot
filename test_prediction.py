@@ -6,7 +6,7 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 df = load_intents("data/intents.csv")
 
 # Train model
-model, vectorizer, X_test, y_test = train_model(df)
+model, vectorizer, X_test_tfidf, y_test, X_test_text = train_model(df)
 
 # New student messages
 messages = [
@@ -32,10 +32,10 @@ predictions = model.predict(messages_tfidf)
 
 for message, prediction in zip(messages, predictions):
     print(f"'{message}' → {prediction}")
-
+    
 
 # Evaluate model on test data
-test_predictions = model.predict(X_test)
+test_predictions = model.predict(X_test_tfidf)
 
 accuracy = accuracy_score(y_test, test_predictions)
 
@@ -63,3 +63,18 @@ print(matrix)
 print("\nLabels:")
 print(labels)
     
+    
+print("-----------------------")
+print("\nMisclassified Examples:")
+print("-----------------------")
+
+for message, actual, predicted in zip(
+    X_test_text,
+    y_test,
+    test_predictions
+):
+    if actual != predicted:
+        print(f"Message:   {message}")
+        print(f"Actual:    {actual}")
+        print(f"Predicted: {predicted}")
+        print()
