@@ -1,5 +1,5 @@
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 from src.preprocessing import create_vectorizer
 
 def train_model(df):
@@ -19,8 +19,10 @@ def train_model(df):
     X_train_tfidf = vectorizer.fit_transform(X_train)
     X_test_tfidf = vectorizer.transform(X_test)
 
-    model = LogisticRegression(max_iter=1000)
-
+    model = RandomForestClassifier(
+    n_estimators=200,
+    random_state=42
+    )
     model.fit(X_train_tfidf, y_train)
 
     return model, vectorizer, X_train_tfidf, X_test_tfidf, y_test, X_test
