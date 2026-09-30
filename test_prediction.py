@@ -22,16 +22,29 @@ messages = [
     "I'm looking for the building where experiments are done!",
     "Can you tell me what comes next?",
     "Who do I report to",
-    "Are students allowed to leave during the day?"
-]
+    "Are students allowed to leave during the day?",
+    "How do I bake a chocolate cake?",
+    "What is the capital of France?",
+    "I like playing football on weekends",
+    "The weather is really nice today",
+    "Can you help me fix my computer?",
+    "Why is the ocean blue?"
+    ]
 
 # Convert messages into TF-IDF
 messages_tfidf = vectorizer.transform(messages)
 
 # Predict intents and check similarity for new messages
+# Predict intents and inspect confidence + similarity
 predictions = model.predict(messages_tfidf)
+probabilities = model.predict_proba(messages_tfidf)
 
-for message, prediction in zip(messages, predictions):
+for message, prediction, probability in zip(
+    messages,
+    predictions,
+    probabilities
+):
+    confidence = probability.max()
 
     message_tfidf = vectorizer.transform([message])
 
@@ -44,9 +57,9 @@ for message, prediction in zip(messages, predictions):
 
     print(
         f"{message} → {prediction} "
-        f"(similarity: {max_similarity:.2f})"
+        f"(confidence: {confidence:.2f}, "
+        f"similarity: {max_similarity:.2f})"
     )
-        
     
 # Evaluate model on test data
 test_predictions = model.predict(X_test_tfidf)
