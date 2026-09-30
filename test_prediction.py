@@ -4,6 +4,7 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
 
+
 # Load dataset
 df = load_intents("data/intents.csv")
 unknown_df = pd.read_csv("data/unknown_examples.csv")
@@ -19,8 +20,21 @@ print(f"Total examples: {len(combined_df)}")
 print("\nIntent distribution:")
 print(combined_df["intent"].value_counts())
 
+
 # Train model
-model, vectorizer, X_train_tfidf, X_test_tfidf, y_test, X_test_text = train_model(combined_df)
+(
+    model,
+    vectorizer,
+    X_train_tfidf,
+    X_test_tfidf,
+    y_test,
+    X_test_text,
+    label_encoder
+) = train_model(combined_df)
+
+# Convert test labels back to intent names
+y_test = label_encoder.inverse_transform(y_test)
+
 
 # New student messages
 messages = [
@@ -42,20 +56,31 @@ messages = [
     "The weather is really nice today",
     "Can you help me fix my computer?",
     "Why is the ocean blue?"
-    ]
+]
 
+
+# Add unknown examples for additional prediction testing
 unknown_messages = unknown_df["text"].tolist()
-
 messages.extend(unknown_messages)
+
 
 # Convert messages into TF-IDF
 messages_tfidf = vectorizer.transform(messages)
 
-# Predict intents and check similarity for new messages
-# Predict intents and inspect confidence + similarity
+
+# Predict intents
 predictions = model.predict(messages_tfidf)
+
+# Convert numeric predictions back to intent names
+predictions = label_encoder.inverse_transform(
+    predictions.astype(int)
+)
+
+# Get prediction probabilities
 probabilities = model.predict_proba(messages_tfidf)
 
+
+# Display predictions
 for message, prediction, probability in zip(
     messages,
     predictions,
@@ -77,20 +102,35 @@ for message, prediction, probability in zip(
         f"(confidence: {confidence:.2f}, "
         f"similarity: {max_similarity:.2f})"
     )
-    
+
+
 # Evaluate model on test data
 test_predictions = model.predict(X_test_tfidf)
 
-accuracy = accuracy_score(y_test, test_predictions)
+# Convert numeric predictions back to intent names
+test_predictions = label_encoder.inverse_transform(
+    test_predictions.astype(int)
+)
+
+
+accuracy = accuracy_score(
+    y_test,
+    test_predictions
+)
 
 print(f"\nAccuracy: {accuracy:.2f}")
 
+
+# Classification Report
 print("\nClassification Report:")
-print(classification_report(
-    y_test,
-    test_predictions,
-    zero_division=0
-))
+print(
+    classification_report(
+        y_test,
+        test_predictions,
+        zero_division=0
+    )
+)
+
 
 # Confusion Matrix
 labels = sorted(combined_df["intent"].unique())
@@ -106,8 +146,9 @@ print(matrix)
 
 print("\nLabels:")
 print(labels)
-    
-    
+
+
+# Misclassified examples
 print("-----------------------")
 print("\nMisclassified Examples:")
 print("-----------------------")
