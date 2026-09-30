@@ -2,9 +2,11 @@ from src.data_loader import load_intents
 from src.training import train_model
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.metrics.pairwise import cosine_similarity
+import pandas as pd
 
 # Load dataset
 df = load_intents("data/intents.csv")
+unknown_df = pd.read_csv("data/unknown_examples.csv")
 
 # Train model
 model, vectorizer, X_train_tfidf, X_test_tfidf, y_test, X_test_text = train_model(df)
@@ -30,6 +32,10 @@ messages = [
     "Can you help me fix my computer?",
     "Why is the ocean blue?"
     ]
+
+unknown_messages = unknown_df["text"].tolist()
+
+messages.extend(unknown_messages)
 
 # Convert messages into TF-IDF
 messages_tfidf = vectorizer.transform(messages)
