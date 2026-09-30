@@ -1,5 +1,5 @@
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
+from xgboost import XGBClassifier
 from src.preprocessing import create_vectorizer
 
 def train_model(df):
@@ -19,10 +19,14 @@ def train_model(df):
     X_train_tfidf = vectorizer.fit_transform(X_train)
     X_test_tfidf = vectorizer.transform(X_test)
 
-    model = RandomForestClassifier(
+    model = XGBClassifier(
     n_estimators=200,
-    random_state=42
-    )
+    max_depth=4,
+    learning_rate=0.1,
+    random_state=42,
+    eval_metric="mlogloss"
+)
+    
     model.fit(X_train_tfidf, y_train)
 
     return model, vectorizer, X_train_tfidf, X_test_tfidf, y_test, X_test
