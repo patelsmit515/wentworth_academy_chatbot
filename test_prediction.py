@@ -8,8 +8,19 @@ import pandas as pd
 df = load_intents("data/intents.csv")
 unknown_df = pd.read_csv("data/unknown_examples.csv")
 
+combined_df = pd.concat(
+    [df, unknown_df],
+    ignore_index=True
+)
+
+print("\nCombined dataset:")
+print(f"Total examples: {len(combined_df)}")
+
+print("\nIntent distribution:")
+print(combined_df["intent"].value_counts())
+
 # Train model
-model, vectorizer, X_train_tfidf, X_test_tfidf, y_test, X_test_text = train_model(df)
+model, vectorizer, X_train_tfidf, X_test_tfidf, y_test, X_test_text = train_model(combined_df)
 
 # New student messages
 messages = [
@@ -82,7 +93,7 @@ print(classification_report(
 ))
 
 # Confusion Matrix
-labels = sorted(df["intent"].unique())
+labels = sorted(combined_df["intent"].unique())
 
 matrix = confusion_matrix(
     y_test,
