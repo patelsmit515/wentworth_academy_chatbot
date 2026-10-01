@@ -145,4 +145,20 @@ for message, actual, predicted in zip(
         print(f"Predicted: {predicted}")
         print()
 
+print("\nRelevant Training Examples:")
+print("----------------------------")
 
+for intent in [
+    "club_information",
+    "class_schedule",
+    "teacher_information",
+    "goodbye"
+]:
+    print(f"\n[{intent}]")
+
+    examples = combined_df[
+        combined_df["intent"] == intent
+    ]["text"].tolist()
+
+    for example in examples:
+        print("-", example)
