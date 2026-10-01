@@ -32,9 +32,6 @@ print(combined_df["intent"].value_counts())
     label_encoder
 ) = train_model(combined_df)
 
-# Convert test labels back to intent names
-y_test = label_encoder.inverse_transform(y_test)
-
 
 # New student messages
 messages = [
@@ -59,7 +56,7 @@ messages = [
 ]
 
 
-# Add unknown examples for additional prediction testing
+# Add unknown examples for additional testing
 unknown_messages = unknown_df["text"].tolist()
 messages.extend(unknown_messages)
 
@@ -163,3 +160,5 @@ for message, actual, predicted in zip(
         print(f"Actual:    {actual}")
         print(f"Predicted: {predicted}")
         print()
+
+
