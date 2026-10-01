@@ -28,8 +28,7 @@ print(combined_df["intent"].value_counts())
     X_train_tfidf,
     X_test_tfidf,
     y_test,
-    X_test_text,
-    label_encoder
+    X_test_text
 ) = train_model(combined_df)
 
 
@@ -68,11 +67,6 @@ messages_tfidf = vectorizer.transform(messages)
 # Predict intents
 predictions = model.predict(messages_tfidf)
 
-# Convert numeric predictions back to intent names
-predictions = label_encoder.inverse_transform(
-    predictions.astype(int)
-)
-
 # Get prediction probabilities
 probabilities = model.predict_proba(messages_tfidf)
 
@@ -103,11 +97,6 @@ for message, prediction, probability in zip(
 
 # Evaluate model on test data
 test_predictions = model.predict(X_test_tfidf)
-
-# Convert numeric predictions back to intent names
-test_predictions = label_encoder.inverse_transform(
-    test_predictions.astype(int)
-)
 
 
 accuracy = accuracy_score(

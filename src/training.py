@@ -1,7 +1,5 @@
-
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder
-from xgboost import XGBClassifier
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.linear_model import LogisticRegression
 from src.preprocessing import create_vectorizer
 
 
@@ -9,16 +7,12 @@ def train_model(df):
     X = df["text"]
     y = df["intent"]
 
-    # Convert intent names into numbers for XGBoost
-    label_encoder = LabelEncoder()
-    y_encoded = label_encoder.fit_transform(y)
-
     X_train, X_test, y_train, y_test = train_test_split(
         X,
-        y_encoded,
+        y,
         test_size=0.3,
         random_state=42,
-        stratify=y_encoded
+        stratify=y
     )
 
     # Create TF-IDF vectorizer
@@ -27,28 +21,39 @@ def train_model(df):
     X_train_tfidf = vectorizer.fit_transform(X_train)
     X_test_tfidf = vectorizer.transform(X_test)
 
-    # Create XGBoost classifier
-    model = XGBClassifier(
-        n_estimators=200,
-        max_depth=4,
-        learning_rate=0.1,
-        random_state=42,
-        eval_metric="mlogloss"
+    # Create Logistic Regression model
+    model = LogisticRegression(
+        max_iter=1000
     )
 
-    # Train the model
-    model.fit(X_train_tfidf, y_train)
+    # Hyperparameters to test
+    param_grid = {
+        "C": [0.1, 0.5, 1, 2, 5, 10]
+    }
 
-    # Convert test labels back to intent names
-    y_test_labels = label_encoder.inverse_transform(y_test)
+    # Grid Search
+    grid_search = GridSearchCV(
+        model,
+        param_grid,
+        cv=5,
+        scoring="accuracy"
+    )
+
+    grid_search.fit(X_train_tfidf, y_train)
+
+    # Get best model
+    model = grid_search.best_estimator_
+
+    print("\nBest Hyperparameters:")
+    print(grid_search.best_params_)
+
+    print(f"Best CV Accuracy: {grid_search.best_score_:.2f}")
 
     return (
         model,
         vectorizer,
         X_train_tfidf,
         X_test_tfidf,
-        y_test_labels,
-        X_test,
-        label_encoder
-    )   
-
+        y_test,
+        X_test
+    )
