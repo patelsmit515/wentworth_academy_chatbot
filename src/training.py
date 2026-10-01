@@ -1,4 +1,4 @@
-from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from src.preprocessing import create_vectorizer
 
@@ -23,31 +23,12 @@ def train_model(df):
 
     # Create Logistic Regression model
     model = LogisticRegression(
+        C=10,
         max_iter=1000
     )
 
-    # Hyperparameters to test
-    param_grid = {
-        "C": [0.1, 0.5, 1, 2, 5, 10]
-    }
-
-    # Grid Search
-    grid_search = GridSearchCV(
-        model,
-        param_grid,
-        cv=5,
-        scoring="accuracy"
-    )
-
-    grid_search.fit(X_train_tfidf, y_train)
-
-    # Get best model
-    model = grid_search.best_estimator_
-
-    print("\nBest Hyperparameters:")
-    print(grid_search.best_params_)
-
-    print(f"Best CV Accuracy: {grid_search.best_score_:.2f}")
+    # Train the model
+    model.fit(X_train_tfidf, y_train)
 
     return (
         model,

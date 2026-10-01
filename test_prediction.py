@@ -55,11 +55,6 @@ messages = [
 ]
 
 
-# Add unknown examples for additional testing
-unknown_messages = unknown_df["text"].tolist()
-messages.extend(unknown_messages)
-
-
 # Convert messages into TF-IDF
 messages_tfidf = vectorizer.transform(messages)
 
