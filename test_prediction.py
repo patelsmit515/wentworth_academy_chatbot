@@ -1,35 +1,32 @@
-from src.data_loader import load_intents
-from src.training import train_model
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
+
+from src.data_loader import load_intents
+from src.features import add_text_features
+from src.training import train_model
+
+from sklearn.metrics import (
+    accuracy_score,
+    classification_report,
+    confusion_matrix
+)
 
 
 # Load dataset
 df = load_intents("data/intents.csv")
-unknown_df = pd.read_csv("data/unknown_examples.csv")
 
-combined_df = pd.concat(
-    [df, unknown_df],
-    ignore_index=True
-)
-
-print("\nCombined dataset:")
-print(f"Total examples: {len(combined_df)}")
-
-print("\nIntent distribution:")
-print(combined_df["intent"].value_counts())
+# Add engineered features
+df = add_text_features(df)
 
 
 # Train model
 (
     model,
-    vectorizer,
-    X_train_tfidf,
-    X_test_tfidf,
+    preprocessor,
+    X_train_processed,
+    X_test_processed,
     y_test,
-    X_test_text
-) = train_model(combined_df)
+    X_test
+) = train_model(df)
 
 
 # New student messages
@@ -55,18 +52,36 @@ messages = [
 ]
 
 
-# Convert messages into TF-IDF
-messages_tfidf = vectorizer.transform(messages)
+# Create DataFrame for new messages
+new_messages = pd.DataFrame({
+    "text": messages
+})
 
 
-# Predict intents
-predictions = model.predict(messages_tfidf)
+# Add the same engineered features
+new_messages = add_text_features(new_messages)
 
-# Get prediction probabilities
-probabilities = model.predict_proba(messages_tfidf)
+
+# Transform using the already-trained preprocessor
+new_messages_processed = preprocessor.transform(
+    new_messages
+)
+
+
+# Predict
+predictions = model.predict(
+    new_messages_processed
+)
+
+probabilities = model.predict_proba(
+    new_messages_processed
+)
 
 
 # Display predictions
+print("\nPredictions:")
+print("-----------------------")
+
 for message, prediction, probability in zip(
     messages,
     predictions,
@@ -74,24 +89,16 @@ for message, prediction, probability in zip(
 ):
     confidence = probability.max()
 
-    message_tfidf = vectorizer.transform([message])
-
-    similarities = cosine_similarity(
-        message_tfidf,
-        X_train_tfidf
-    )
-
-    max_similarity = similarities.max()
-
     print(
         f"{message} → {prediction} "
-        f"(confidence: {confidence:.2f}, "
-        f"similarity: {max_similarity:.2f})"
+        f"(confidence: {confidence:.2f})"
     )
 
 
-# Evaluate model on test data
-test_predictions = model.predict(X_test_tfidf)
+# Test-set evaluation
+test_predictions = model.predict(
+    X_test_processed
+)
 
 
 accuracy = accuracy_score(
@@ -102,7 +109,7 @@ accuracy = accuracy_score(
 print(f"\nAccuracy: {accuracy:.2f}")
 
 
-# Classification Report
+# Classification report
 print("\nClassification Report:")
 print(
     classification_report(
@@ -113,8 +120,10 @@ print(
 )
 
 
-# Confusion Matrix
-labels = sorted(combined_df["intent"].unique())
+# Confusion matrix
+labels = sorted(
+    df["intent"].unique()
+)
 
 matrix = confusion_matrix(
     y_test,
@@ -130,35 +139,19 @@ print(labels)
 
 
 # Misclassified examples
-print("-----------------------")
-print("\nMisclassified Examples:")
+print("\n-----------------------")
+print("Misclassified Examples:")
 print("-----------------------")
 
 for message, actual, predicted in zip(
-    X_test_text,
+    X_test["text"],
     y_test,
     test_predictions
 ):
+
     if actual != predicted:
+
         print(f"Message:   {message}")
         print(f"Actual:    {actual}")
         print(f"Predicted: {predicted}")
         print()
-
-print("\nRelevant Training Examples:")
-print("----------------------------")
-
-for intent in [
-    "club_information",
-    "class_schedule",
-    "teacher_information",
-    "goodbye"
-]:
-    print(f"\n[{intent}]")
-
-    examples = combined_df[
-        combined_df["intent"] == intent
-    ]["text"].tolist()
-
-    for example in examples:
-        print("-", example)

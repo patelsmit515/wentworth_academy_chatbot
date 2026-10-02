@@ -1,13 +1,13 @@
-from src.features import create_text_features
+from src.data_loader import load_intents
+from src.features import add_text_features
 
 
-messages = [
-    "Who teaches chemistry?",
-    "I have to go!",
-    "What is my class today?"
-]
+df = load_intents("data/intents.csv")
 
+df = add_text_features(df)
 
-features = create_text_features(messages)
+print("\nDataset with features:")
+print(df.head())
 
-print(features)
+print("\nColumns:")
+print(df.columns)

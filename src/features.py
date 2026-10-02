@@ -1,26 +1,29 @@
-def create_text_features(texts):
-    features = []
+def add_text_features(df):
+    df = df.copy()
 
-    for text in texts:
-        words = text.split()
+    df["word_count"] = df["text"].apply(
+        lambda text: len(text.split())
+    )
 
-        word_count = len(words)
-        char_count = len(text)
-        avg_word_length = (
-            sum(len(word) for word in words) / word_count
-            if word_count > 0
+    df["char_count"] = df["text"].apply(
+        len
+    )
+
+    df["avg_word_length"] = df.apply(
+        lambda row: (
+            row["char_count"] / row["word_count"]
+            if row["word_count"] > 0
             else 0
-        )
+        ),
+        axis=1
+    )
 
-        question_mark = int("?" in text)
-        exclamation_mark = int("!" in text)
+    df["question_mark"] = df["text"].apply(
+        lambda text: int("?" in text)
+    )
 
-        features.append([
-            word_count,
-            char_count,
-            avg_word_length,
-            question_mark,
-            exclamation_mark
-        ])
+    df["exclamation_mark"] = df["text"].apply(
+        lambda text: int("!" in text)
+    )
 
-    return features
+    return df

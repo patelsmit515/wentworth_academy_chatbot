@@ -1,10 +1,22 @@
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-from src.preprocessing import create_vectorizer
+
+from src.preprocessing import create_preprocessor
 
 
 def train_model(df):
-    X = df["text"]
+
+    X = df[
+        [
+            "text",
+            "word_count",
+            "char_count",
+            "avg_word_length",
+            "question_mark",
+            "exclamation_mark"
+        ]
+    ]
+
     y = df["intent"]
 
     X_train, X_test, y_train, y_test = train_test_split(
@@ -15,11 +27,14 @@ def train_model(df):
         stratify=y
     )
 
-    # Create TF-IDF vectorizer
-    vectorizer = create_vectorizer()
+    # Create preprocessing system
+    preprocessor = create_preprocessor()
 
-    X_train_tfidf = vectorizer.fit_transform(X_train)
-    X_test_tfidf = vectorizer.transform(X_test)
+    # Learn transformations from training data
+    X_train_processed = preprocessor.fit_transform(X_train)
+
+    # Apply the same transformations to test data
+    X_test_processed = preprocessor.transform(X_test)
 
     # Create Logistic Regression model
     model = LogisticRegression(
@@ -27,14 +42,17 @@ def train_model(df):
         max_iter=1000
     )
 
-    # Train the model
-    model.fit(X_train_tfidf, y_train)
+    # Train model
+    model.fit(
+        X_train_processed,
+        y_train
+    )
 
     return (
         model,
-        vectorizer,
-        X_train_tfidf,
-        X_test_tfidf,
+        preprocessor,
+        X_train_processed,
+        X_test_processed,
         y_test,
         X_test
     )
