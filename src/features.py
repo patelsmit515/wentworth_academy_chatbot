@@ -28,61 +28,7 @@ def add_text_features(df):
         lambda text: int("!" in text)
     )
 
-    # Targeted semantic features
-    df["question_signal"] = df["text"].apply(
-        lambda text: int(
-            any(
-                word in text.lower().split()
-                for word in [
-                    "what",
-                    "when",
-                    "where",
-                    "who",
-                    "which",
-                    "how",
-                    "why"
-                ]
-            )
-        )
-    )
-
-    df["greeting_signal"] = df["text"].apply(
-        lambda text: int(
-            any(
-                phrase in text.lower()
-                for phrase in [
-                    "hello",
-                    "hi",
-                    "hey",
-                    "good morning",
-                    "good afternoon",
-                    "good evening",
-                    "good to see you",
-                    "nice to see you"
-                ]
-            )
-        )
-    )
-
-    df["goodbye_signal"] = df["text"].apply(
-        lambda text: int(
-            any(
-                phrase in text.lower()
-                for phrase in [
-                    "bye",
-                    "goodbye",
-                    "leave",
-                    "leaving",
-                    "heading out",
-                    "see you",
-                    "gotta go",
-                    "have to go",
-                    "need to go"
-                ]
-            )
-        )
-    )
-
+    # Exam/test signal
     df["exam_signal"] = df["text"].apply(
         lambda text: int(
             any(
@@ -101,21 +47,5 @@ def add_text_features(df):
         )
     )
 
-    df["teacher_signal"] = df["text"].apply(
-        lambda text: int(
-            any(
-                phrase in text.lower()
-                for phrase in [
-                    "teacher",
-                    "professor",
-                    "instructor",
-                    "sir",
-                    "ma'am",
-                    "who teaches",
-                    "which teacher"
-                ]
-            )
-        )
-    )
-
     return df
+

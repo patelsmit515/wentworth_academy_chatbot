@@ -11,11 +11,7 @@ NUMERIC_FEATURES = [
     "avg_word_length",
     "question_mark",
     "exclamation_mark",
-    "question_signal",
-    "greeting_signal",
-    "goodbye_signal",
-    "exam_signal",
-    "teacher_signal"
+    "exam_signal"
 ]
 
 
@@ -39,3 +35,4 @@ def create_preprocessor():
     )
 
     return preprocessor
+

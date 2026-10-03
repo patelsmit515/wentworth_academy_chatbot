@@ -14,16 +14,13 @@ def train_model(df):
             "avg_word_length",
             "question_mark",
             "exclamation_mark",
-            "question_signal",
-            "greeting_signal",
-            "goodbye_signal",
-            "exam_signal",
-            "teacher_signal"
+            "exam_signal"
         ]
     ]
 
     y = df["intent"]
 
+    # Split the dataset
     X_train, X_test, y_train, y_test = train_test_split(
         X,
         y,
@@ -32,13 +29,13 @@ def train_model(df):
         stratify=y
     )
 
-    # Create preprocessing system
+    # Create preprocessing pipeline
     preprocessor = create_preprocessor()
 
-    # Learn transformations from training data
+    # Fit preprocessing only on training data
     X_train_processed = preprocessor.fit_transform(X_train)
 
-    # Apply the same transformations to test data
+    # Apply the same preprocessing to test data
     X_test_processed = preprocessor.transform(X_test)
 
     # Create Logistic Regression model
@@ -47,7 +44,7 @@ def train_model(df):
         max_iter=1000
     )
 
-    # Train model
+    # Train the model
     model.fit(
         X_train_processed,
         y_train
@@ -61,3 +58,4 @@ def train_model(df):
         y_test,
         X_test
     )
+

@@ -17,7 +17,17 @@ df = load_intents("data/intents.csv")
 # Add engineered features
 df = add_text_features(df)
 
+print("\nUnknown training examples:")
+print("-----------------------")
 
+unknown_examples = df[
+    df["intent"] == "unknown"
+]["text"]
+
+for example in unknown_examples:
+    print("-", example)
+    
+    
 # Train model
 (
     model,
