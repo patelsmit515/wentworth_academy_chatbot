@@ -13,7 +13,12 @@ def train_model(df):
             "char_count",
             "avg_word_length",
             "question_mark",
-            "exclamation_mark"
+            "exclamation_mark",
+            "question_signal",
+            "greeting_signal",
+            "goodbye_signal",
+            "exam_signal",
+            "teacher_signal"
         ]
     ]
 
