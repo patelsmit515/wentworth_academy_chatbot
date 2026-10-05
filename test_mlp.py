@@ -18,6 +18,7 @@ df = add_text_features(df)
     model,
     preprocessor,
     X_train_processed,
+    y_train,
     X_test_processed,
     y_test,
     X_test

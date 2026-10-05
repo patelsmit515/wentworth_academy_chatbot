@@ -54,10 +54,11 @@ def train_mlp(df):
     )
 
     return (
-        model,
-        preprocessor,
-        X_train_processed,
-        X_test_processed,
-        y_test,
-        X_test
-    )
+    model,
+    preprocessor,
+    X_train_processed,
+    y_train,
+    X_test_processed,
+    y_test,
+    X_test
+)
