@@ -59,4 +59,15 @@ print(
     )
 )
     
-    
+print("\nExamples Predicted as Unknown:")
+print("------------------------------")
+
+for message, actual, predicted in zip(
+    X_test["text"],
+    y_test,
+    y_pred
+):
+    if predicted == "unknown":
+        print(f"Message:   {message}")
+        print(f"Actual:    {actual}")
+        print()

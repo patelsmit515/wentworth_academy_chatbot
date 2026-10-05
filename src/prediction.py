@@ -9,6 +9,28 @@ def predict_intent(
     preprocessor
 ):
 
+    # Simple goodbye detection
+    goodbye_phrases = [
+        "goodbye",
+        "good bye",
+        "bye",
+        "see you",
+        "talk to you later",
+        "i have to go",
+        "i need to go",
+        "i'm leaving",
+        "i am leaving"
+    ]
+
+    message_lower = message.lower()
+
+    if any(
+        phrase in message_lower
+        for phrase in goodbye_phrases
+    ):
+        return "goodbye", 1.00
+
+
     # Create DataFrame for the new message
     new_message = pd.DataFrame({
         "text": [message]
