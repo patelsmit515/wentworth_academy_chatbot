@@ -17,18 +17,8 @@ df = load_intents("data/intents.csv")
 # Add engineered features
 df = add_text_features(df)
 
-print("\nUnknown training examples:")
-print("-----------------------")
 
-unknown_examples = df[
-    df["intent"] == "unknown"
-]["text"]
-
-for example in unknown_examples:
-    print("-", example)
-    
-    
-# Train model
+# Train Logistic Regression baseline
 (
     model,
     preprocessor,
@@ -72,13 +62,13 @@ new_messages = pd.DataFrame({
 new_messages = add_text_features(new_messages)
 
 
-# Transform using the already-trained preprocessor
+# Transform using the trained preprocessor
 new_messages_processed = preprocessor.transform(
     new_messages
 )
 
 
-# Predict
+# Make predictions
 predictions = model.predict(
     new_messages_processed
 )
@@ -89,8 +79,8 @@ probabilities = model.predict_proba(
 
 
 # Display predictions
-print("\nPredictions:")
-print("-----------------------")
+print("\nManual Predictions:")
+print("-------------------")
 
 for message, prediction, probability in zip(
     messages,
@@ -100,27 +90,27 @@ for message, prediction, probability in zip(
     confidence = probability.max()
 
     print(
-        f"{message} → {prediction} "
+        f"{message} -> {prediction} "
         f"(confidence: {confidence:.2f})"
     )
 
 
-# Test-set evaluation
+# Evaluate on the test set
 test_predictions = model.predict(
     X_test_processed
 )
-
 
 accuracy = accuracy_score(
     y_test,
     test_predictions
 )
 
-print(f"\nAccuracy: {accuracy:.2f}")
+print(f"\nLogistic Regression Accuracy: {accuracy:.2f}")
 
 
 # Classification report
 print("\nClassification Report:")
+
 print(
     classification_report(
         y_test,
@@ -149,8 +139,7 @@ print(labels)
 
 
 # Misclassified examples
-print("\n-----------------------")
-print("Misclassified Examples:")
+print("\nMisclassified Examples:")
 print("-----------------------")
 
 for message, actual, predicted in zip(
@@ -158,9 +147,7 @@ for message, actual, predicted in zip(
     y_test,
     test_predictions
 ):
-
     if actual != predicted:
-
         print(f"Message:   {message}")
         print(f"Actual:    {actual}")
         print(f"Predicted: {predicted}")

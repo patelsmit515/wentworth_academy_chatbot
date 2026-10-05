@@ -9,11 +9,12 @@ df = load_intents("data/intents.csv")
 # Add engineered features
 df = add_text_features(df)
 
+
 print("\nDataset columns:")
 print(df.columns.tolist())
 
 
-# Train model
+# Train Logistic Regression baseline
 (
     model,
     preprocessor,
@@ -23,8 +24,6 @@ print(df.columns.tolist())
     X_test
 ) = train_model(df)
 
-
-print("\nTraining successful!")
 
 print(
     f"Training rows: {X_train_processed.shape[0]}"
