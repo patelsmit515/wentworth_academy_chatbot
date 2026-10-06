@@ -15,11 +15,11 @@ df = add_text_features(df)
 (
     model,
     preprocessor,
-    X_train_processed,
-    y_train,
-    X_test_processed,
-    y_test,
-    X_test
+    _,
+    _,
+    _,
+    _,
+    _
 ) = train_mlp(df)
 
 
@@ -41,10 +41,10 @@ print("---------------------")
 for message in messages:
 
     prediction, confidence = predict_intent(
-    message,
-    model,
-    preprocessor
-)
+        message,
+        model,
+        preprocessor
+    )
 
     print(
         f"{message} -> {prediction} "

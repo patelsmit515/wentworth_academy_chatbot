@@ -16,11 +16,11 @@ df = add_text_features(df)
 (
     model,
     preprocessor,
-    X_train_processed,
-    y_train,
-    X_test_processed,
-    y_test,
-    X_test
+    _,
+    _,
+    _,
+    _,
+    _
 ) = train_mlp(df)
 
 
@@ -48,9 +48,9 @@ for message in messages:
     )
 
     response = get_response(
-    intent,
-    message
-)
+        intent,
+        message
+    )
 
     print(f"\nStudent: {message}")
     print(f"Intent: {intent}")

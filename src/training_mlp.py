@@ -40,12 +40,12 @@ def train_mlp(df):
 
     # Neural network
     model = MLPClassifier(
-    hidden_layer_sizes=(128, 64, 32),
-    activation="relu",
-    solver="adam",
-    max_iter=500,
-    random_state=42
-)
+        hidden_layer_sizes=(128, 64, 32),
+        activation="relu",
+        solver="adam",
+        max_iter=500,
+        random_state=42
+    )
 
     # Train
     model.fit(
@@ -54,11 +54,11 @@ def train_mlp(df):
     )
 
     return (
-    model,
-    preprocessor,
-    X_train_processed,
-    y_train,
-    X_test_processed,
-    y_test,
-    X_test
-)
+        model,
+        preprocessor,
+        X_train_processed,
+        y_train,
+        X_test_processed,
+        y_test,
+        X_test
+    )

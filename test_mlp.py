@@ -17,11 +17,11 @@ df = add_text_features(df)
 (
     model,
     preprocessor,
-    X_train_processed,
-    y_train,
+    _,
+    _,
     X_test_processed,
     y_test,
-    X_test
+    _
 ) = train_mlp(df)
 
 
@@ -58,16 +58,3 @@ print(
         y_pred
     )
 )
-    
-print("\nExamples Predicted as Unknown:")
-print("------------------------------")
-
-for message, actual, predicted in zip(
-    X_test["text"],
-    y_test,
-    y_pred
-):
-    if predicted == "unknown":
-        print(f"Message:   {message}")
-        print(f"Actual:    {actual}")
-        print()
